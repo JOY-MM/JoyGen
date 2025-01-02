@@ -1,0 +1,281 @@
+
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>JoyGen: Audio-Driven 3D Depth-Aware Talking-Face Video Editing</title>
+<link href="./assets/style.css" rel="stylesheet">
+<style>@font-face {
+        font-family: 'monica-ext-font_YIBBBFG';
+        src: url('chrome-extension://ofpnmcalabcbjgholdjcjblkibolbppb/static/fonts/Hind-Light.otf');
+        font-weight: 300;
+        font-display: swap;
+      }
+@font-face {
+        font-family: 'monica-ext-font_YIBBBFG';
+        src: url('chrome-extension://ofpnmcalabcbjgholdjcjblkibolbppb/static/fonts/Hind-Regular.otf');
+        font-weight: 400;
+        font-display: swap;
+      }
+@font-face {
+        font-family: 'monica-ext-font_YIBBBFG';
+        src: url('chrome-extension://ofpnmcalabcbjgholdjcjblkibolbppb/static/fonts/Hind-Medium.otf');
+        font-weight: 500;
+        font-display: swap;
+      }
+@font-face {
+        font-family: 'monica-ext-font_YIBBBFG';
+        src: url('chrome-extension://ofpnmcalabcbjgholdjcjblkibolbppb/static/fonts/Hind-SemiBold.otf');
+        font-weight: 600;
+        font-display: swap;
+      }</style><style id="monica-reading-highlight-style">
+        .monica-reading-highlight {
+          animation: fadeInOut 1.5s ease-in-out;
+        }
+
+        @keyframes fadeInOut {
+          0%, 100% { background-color: transparent; }
+          30%, 70% { background-color: rgba(2, 118, 255, 0.20); }
+        }
+      </style></head>
+
+<body monica-locale="zh_CN" monica-version="5.5.1" monica-id="ofpnmcalabcbjgholdjcjblkibolbppb">
+<div class="content">
+  <h1><span><img src="./assets/joygen_logo3.png" style="height: 120px;"></span><strong><br>Audio-Driven 3D Depth-Aware Talking-Face Video Editing</strong></h1>
+  <p id="authors" class="serif">
+    <a>Qili Wang<sup>1</sup></a>
+    <a>Dajiang Wu<sup>1</sup></a>
+    <a>Zihang Xu<sup>2</sup></a>
+    <a>Junshi Huang<sup>1</sup></a>
+    <a>Jun Lv<sup>1</sup></a>
+    <br>
+  </p>
+
+  <p style="font-size: 1.0em; margin-top: 0.8em; text-align: center">
+    <sup>1</sup>JD.Com, Inc., {wangqili, wudajiang, huangjunshi, lvjun}@jd.com
+  </p>
+
+  <p style="font-size: 1.0em; margin-top: 0.8em; text-align: center">
+    <sup>2</sup>The University of Hong Kong, xuzihang@connect.hku.hk
+  </p>
+
+  <font size="+2">
+    <!-- <div style="text-align: center; display: flex; justify-content: space-between; margin: 20px 60px;"> -->
+    <div style="text-align: center; display: flex; justify-content: center; margin: 10px 16px; font-size:20">
+      <a target="_blank" ,="" href="xx">
+        <img src="./assets/th.png" alt="arxiv" ,="" style="width: 25px;">[Paper]
+      </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a target="_blank" ,="" href="xx">
+        <img src="./assets/github.png" alt="github" ,="" style="width: 25px;">[Github]
+      </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </div>
+  </font>
+
+  </div>
+</div>
+
+<div class="content">
+  <h2 style="text-align:center"><strong>Abstract</strong></h2>
+  <p>
+    Significant progress has been made in talking-face video generation research; however, precise lip-audio synchronization and high visual quality remain challenging in editing lip shapes based on input audio. This paper introduces JoyGen, a novel two-stage framework for talking-face generation, comprising audio-driven lip motion generation and visual appearance synthesis. In the first stage, a 3D reconstruction model and an audio2motion model predict identity and expression coefficients respectively. Next, by integrating audio features with a facial depth map, we provide comprehensive supervision for precise lip-audio synchronization in facial generation. Additionally, we constructed a Chinese talking-face dataset containing 130 hours of high-quality video. JoyGen is trained on the open-source HDTF dataset and our curated dataset. Experimental results demonstrate superior lip-audio synchronization and visual quality achieved by our method.
+  </p>
+  <div id="teasers" style="text-align: center;">
+      <img src="assets/joygen.png" ,="" style="width: 90%;">
+      <figcaption></figcaption>
+  </div>
+</div>
+
+
+
+<div class="content">
+  <h2 style="text-align:center"><strong>Dataset</strong></h2>
+  <p>
+    Most publicly available Talking Face datasets focus predominantly on English-speaking scenarios. To promote applications in Chinese-speaking contexts, we have constructed a high-definition Talking Face dataset featuring Chinese-language videos. Our new collected dataset comprises approximately 1.1k videos, and a total length of approximately 130 hours.
+  </p>
+  <div class="results">
+      <div class="row2">
+        <figure>
+          <img src="./assets/dataset_duration.png" style="width: 250px; height: auto;">
+        </figure>
+        <figure>
+          <img src="./assets/dataset_fps.png" style="width: 250px; height: auto;">
+        </figure>
+      </div>
+
+      <div class="row2">
+        <figure>
+          <img src="./assets/dataset_gender.png" style="width: 250px; height: auto;">
+        </figure>
+        <figure>
+          <img src="assets/dataset_hist.png" style="width: 250px; height: auto;">
+        </figure>
+      </div>
+
+      <div style="margin-top: 0px; text-align: center;">
+        <figcaption style="font-size: 14px; color: #555;">Statistics of our newly curated chinese talking-face dataset. Our dataset has an approximately equal ratio of males and females,
+with varying video lengths and frame rates, and includes high-resolution video frames.</figcaption>
+      </div>
+    </div>
+</div>
+
+<div class="content">
+  <h2 style="text-align: center;"><strong>Results</strong></h2>
+  <h3>Audio Driven (Chinese)</h3>
+  <div class="results">
+    <div class="row1">
+      <video width="200" height="auto" controls="">
+        <source src="assets/eng01_female_xinwen01.mp4" type="video/mp4">
+      </video>
+      <video width="200" height="auto" controls="">
+        <source src="assets/eng03_female_xinwen03.mp4" type="video/mp4">
+      </video>
+      <video width="200" height="auto" controls="">
+        <source src="assets/eng04_male_xinwen04.mp4" type="video/mp4">
+      </video>
+      <video width="200" height="auto" controls="">
+        <source src="assets/eng05_female_xinwen06.mp4" type="video/mp4">
+      </video>
+      <video width="200" height="auto" controls="">
+        <source src="assets/eng07_male_xinwen04.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <h3>Audio Driven (English)</h3>
+    <div class="row1">
+      <video width="200" height="auto" controls="">
+        <source src="assets/ch02_female_eng03_female.mp4" type="video/mp4">
+      </video>
+      <video width="200" height="auto" controls="">
+        <source src="assets/ch03_male_eng04_male.mp4" type="video/mp4">
+      </video>
+      <video width="200" height="auto" controls="">
+        <source src="assets/ch04_female_eng05_female.mp4" type="video/mp4">
+      </video>
+      <video width="200" height="auto" controls="">
+        <source src="assets/ch05_male_eng06_male.mp4" type="video/mp4">
+      </video>
+      <video width="200" height="auto" controls="">
+        <source src="assets/ch08_female_eng02_female.mp4" type="video/mp4">
+      </video>
+    </div>
+
+
+    <h3><strong> Quantitative Results</strong></h3>
+
+    <div>
+      <div class="row2">
+        <figure>
+          <img src="./assets/quantitative01.png" style="height: 150px; width: auto;">
+        </figure>
+        <figure>
+          <img src="./assets/quantitative02.png" style="height: 150px; width: auto;">
+        </figure>
+      </div>
+      <div style="margin-top: 0px; text-align: center;">
+        <figcaption style="font-size: 14px; color: #555;">Quantitative evaluation results on the HDTF dataset and our collected dataset</figcaption>
+      </div>
+    </div>
+
+    <div>
+      <div class="row2">
+        <figure>
+          <img src="./assets/hdtf_lse_dist.png" style="height: 300px; width: auto;">
+        </figure>
+        <figure>
+          <img src="./assets/hdtf_lse_sim.png" style="height: 300px; width: auto;">
+        </figure>
+      </div>
+      <div style="margin-top: 0px; text-align: center;">
+        <figcaption style="font-size: 14px; color: #555;">The distribution curves of LSE-D and LSE-C scores on the HDTF dataset</figcaption>
+      </div>
+    </div>
+
+    <div>
+      <div class="row2">
+        <figure>
+          <img src="./assets/dybili_lse_dist.png" style="height: 300px; width: auto;">
+        </figure>
+        <figure>
+          <img src="./assets/dybili_lse_sim.png" style="height: 300px; width: auto;">
+        </figure>
+      </div>
+      <div style="margin-top: 0px; text-align: center;">
+        <figcaption style="font-size: 14px; color: #555;">The distribution curves of LSE-D and LSE-C scores on our collected dataset</figcaption>
+      </div>
+    </div>
+
+    <!-- <div class="row" style="text-align: center; margin-bottom: 10px;">
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+        <div style="display: flex; justify-content: center; gap: 10px;">
+          <figure style="margin: 0;">
+            <img src="./assets/quantitative01.png" style="height: 150px; width: auto;">
+          </figure>
+          <figure style="margin: 0;">
+            <img src="./assets/quantitative02.png" style="height: 150px; width: auto;">
+          </figure>
+        </div>
+        <div style="margin-top: 10px;">
+          <figcaption style="font-size: 14px; color: #555;">The distribution curves of LSE-D and LSE-C scores on the HDTF dataset</figcaption>
+        </div>
+      </div>
+    </div>   -->
+
+    <!-- <div class="row" style="text-align: center; margin-bottom: 10px;">
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+        <div style="display: flex; justify-content: center; gap: 10px;">
+          <figure style="margin: 0;">
+            <img src="./assets/hdtf_lse_dist.png" style="height: 300px; width: auto;">
+          </figure>
+          <figure style="margin: 0;">
+            <img src="./assets/hdtf_lse_sim.png" style="height: 300px; width: auto;">
+          </figure>
+        </div>
+        <div style="margin-top: 5px;">
+          <figcaption style="font-size: 14px; color: #555;">The distribution curves of LSE-D and LSE-C scores on the HDTF dataset</figcaption>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row" style="text-align: center; margin-bottom: 10px;">
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+        <div style="display: flex; justify-content: center; gap: 10px;">
+          <figure style="margin: 0;">
+            <img src="./assets/dybili_lse_dist.png" style="height: 300px; width: auto;">
+          </figure>
+          <figure style="margin: 0;">
+            <img src="./assets/dybili_lse_sim.png" style="height: 300px; width: auto;">
+          </figure>
+        </div>
+        <div style="margin-top: 10px;">
+          <figcaption style="font-size: 14px; color: #555;">The distribution curves of LSE-D and LSE-C scores on our collected dataset</figcaption>
+        </div>
+      </div>
+    </div> -->
+
+    <h3><strong>Qualitative Results </strong></h3>
+    <div class="column", style="text-align: center;">
+      <video width="900" height="auto" controls="">
+        <source src="assets/ex1_xin1.mp4" type="video/mp4">
+      </video>
+      <br>
+      <video width="900" height="auto" controls="">
+        <source src="assets/ex3_xin2.mp4" type="video/mp4">
+      </video>
+      <figure style="margin: 0;">
+        <img src="./assets/c.drawio.png" style="width: 900px; height: auto;">
+      </figure>
+    </div>
+
+  </div>
+</div>
+<div class="content">
+  <h2 style="text-align:center; margin: 0 auto;"><strong>BibTex</strong></h2>
+  <code>@article{xx,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title={JoyGen: Audio-Driven 3D Depth-Aware Talking-Face Video Editing},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;author={Qili Wang, Dajiang Wu, Zihang Xu, Junshi Huang, Jun Lv}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;year={2025},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eprint={xx},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;archivePrefix={arXiv},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;primaryClass={cs.CV}<br>
+        }
+   </code>
+</div>
+</body></html>
